@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace BridgeRace
@@ -9,8 +10,18 @@ namespace BridgeRace
         private Joystick joystick;
         [SerializeField]
         private float speed = 1f;
+        [SerializeField]
+        private Brick brickPrefab;
+        [SerializeField]
+        private BrickType myBrickType;
+        [SerializeField]
+        private Transform backpackPoint;
 
         private Rigidbody player;
+        private int countBriks;
+
+        public BrickType MyBrickType => myBrickType;
+        public Transform BackpackPoint => backpackPoint;
 
         private void Start()
         {
@@ -27,6 +38,13 @@ namespace BridgeRace
                 player.MovePosition(transform.position + direction * Time.deltaTime);
                 player.MoveRotation(Quaternion.LookRotation(direction));
             }
-        }    
+        }
+
+        internal void PickUp(Transform transform)
+        {
+
+            Instantiate(brickPrefab, transform, false);
+
+        }
     }
 }

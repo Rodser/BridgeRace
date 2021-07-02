@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BridgeRace
 {
@@ -10,14 +8,12 @@ namespace BridgeRace
         Red, Blue, Green
     }
 
-
     public class Brick : MonoBehaviour
     {
         [SerializeField]
         private BrickType brickType;
 
         private PlayerController player;
-
 
         private void OnTriggerEnter(Collider other)
         {            
@@ -34,12 +30,13 @@ namespace BridgeRace
 
         private void PickUp()
         {
-            Vector3 pos = transform.position;
-            Transform newTransform = player.BackpackPoint;
-            newTransform.TransformPoint(pos);
-
-            player.PickUp(newTransform);
+            Vector3 offset = transform.position - player.transform.position;
+            Vector3 position = player.transform.position + offset;
+            Quaternion quaternion = transform.rotation;
+                 
+            player.PickUp(position, quaternion);
             Destroy(gameObject);
         }
+
     }
 }

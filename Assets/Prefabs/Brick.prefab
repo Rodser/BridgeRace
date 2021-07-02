@@ -109,3 +109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickType: 1
+  offset: 0.001
+  speed: 4
+  pointNextBrick: {fileID: 0}

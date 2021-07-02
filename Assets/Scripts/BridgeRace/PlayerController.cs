@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BridgeRace
@@ -9,29 +10,34 @@ namespace BridgeRace
         [SerializeField]
         private Joystick joystick;
         [SerializeField]
-        private float speed = 1f;
+        private float speedMover = 4f;
         [SerializeField]
-        private Brick brickPrefab;
+        private BrickInPack brickPrefab;
         [SerializeField]
         private BrickType myBrickType;
         [SerializeField]
-        private Transform backpackPoint;
+        private Transform packPointStart;
+        [SerializeField]
+        private Transform packPointUp;
+        [SerializeField]
+        private Transform packPointEnd;
 
         private Rigidbody player;
-        private int countBriks;
+        private List<BrickInPack> bricks;
+        private int countBrick = 0;
 
         public BrickType MyBrickType => myBrickType;
-        public Transform BackpackPoint => backpackPoint;
 
         private void Start()
         {
             player = GetComponent<Rigidbody>();
+            bricks = new List<BrickInPack>();
         }
 
         private void FixedUpdate()
         {
-            Vector3 direction = new Vector3(joystick.Horizontal, 0f, joystick.Vertical) * speed;
-            direction = Vector3.ClampMagnitude(direction, speed);
+            Vector3 direction = new Vector3(joystick.Horizontal, 0f, joystick.Vertical) * speedMover;
+            direction = Vector3.ClampMagnitude(direction, speedMover);
 
             if (direction != Vector3.zero)
             {
@@ -40,11 +46,14 @@ namespace BridgeRace
             }
         }
 
-        internal void PickUp(Transform transform)
+        internal void PickUp(Vector3 brickPosition, Quaternion quaternion)
         {
+            BrickInPack brick = Instantiate(brickPrefab, brickPosition, quaternion, transform);
+            countBrick++;
+                                   
+            brick.MoveBrickInPack(packPointStart.localPosition, packPointUp.localPosition, packPointEnd.localPosition, packPointEnd.localRotation, countBrick);          
 
-            Instantiate(brickPrefab, transform, false);
-
+            bricks.Add(brick);
         }
     }
 }

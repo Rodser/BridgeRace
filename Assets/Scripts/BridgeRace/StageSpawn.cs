@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace BridgeRace
 {
     public class StageSpawn : MonoBehaviour
@@ -8,11 +7,13 @@ namespace BridgeRace
         [SerializeField]
         private Stage stagePrefab;
 
+        private PlayerController player;
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                var player = other.gameObject.GetComponentInParent<PlayerController>();
+                player = other.gameObject.GetComponentInParent<PlayerController>();
 
                 if (player.CountDrick > 0)
                 {
@@ -25,6 +26,7 @@ namespace BridgeRace
         private void Spawn()
         {
             var stage = Instantiate(stagePrefab, transform.position, transform.rotation);
+            stage.SetColor(player.MyBrickType);
             Destroy(gameObject);
         }
     }

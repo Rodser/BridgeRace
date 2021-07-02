@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BridgeRace
 {
-
     class BrickInPack : MonoBehaviour
     {
         [SerializeField]
@@ -50,7 +42,7 @@ namespace BridgeRace
             }
         }
 
-        internal void MoveBrickInPack(Vector3 pointStart, Vector3 pointUp, Vector3 pointEnd, Quaternion rotation, int count)
+        public void MoveBrickInPack(Vector3 pointStart, Vector3 pointUp, Vector3 pointEnd, Quaternion rotation, int count)
         {
             point0 = transform.position;
             point1 = pointStart;
@@ -60,12 +52,10 @@ namespace BridgeRace
 
             rotationBrick = rotation;
             rotationBrick.y = 0;
-            print(pointStart);
-
             time = 0;
         }
 
-        internal void Destroy()
+        public void Destroy()
         {
             Destroy(gameObject);
         }

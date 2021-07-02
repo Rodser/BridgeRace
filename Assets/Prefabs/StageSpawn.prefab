@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5703545215860077861}
   m_Layer: 0
   m_Name: StageSpawn
-  m_TagString: Untagged
+  m_TagString: Spawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,4 +72,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stagePrefab: {fileID: 7003894210805599155, guid: 1279f47d4aca5cb4cae5dd409dd41669, type: 3}
-  parentStage: {fileID: 0}

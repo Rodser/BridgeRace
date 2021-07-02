@@ -156,6 +156,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   next: {fileID: 8640386490403425256}
+  materials:
+  - {fileID: 2100000, guid: 806b955bea73f1845b1a8731544a1e62, type: 2}
+  - {fileID: 2100000, guid: b97e518cc17c6aa489cb9e96f7964141, type: 2}
+  - {fileID: 2100000, guid: d3b67132f2b6af94d898bbd570ac885e, type: 2}
 --- !u!1 &2063967265940184414
 GameObject:
   m_ObjectHideFlags: 0

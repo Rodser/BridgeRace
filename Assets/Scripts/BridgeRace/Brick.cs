@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BridgeRace
 {
-    public enum BrickType 
+    public enum BrickType
     {
         Red, Blue, Green
     }
@@ -18,42 +17,42 @@ namespace BridgeRace
         private PlayerController player;
         private BrickSpawn brickSpawn;
 
+        public BrickType BrickType => brickType;
+
         private void Start()
         {
-            GetColor();
-            brickSpawn = GameObject.FindObjectOfType<BrickSpawn>();
+            SetColor();
+            brickSpawn = FindObjectOfType<BrickSpawn>();
+            player = FindObjectOfType<PlayerController>();
+        }
+        public void SetBrickType(BrickType type)
+        {
+            brickType = type;
         }
 
         private void OnTriggerEnter(Collider other)
-        {            
+        {
             if (other.CompareTag("Player"))
             {
-                player = other.gameObject.GetComponentInParent<PlayerController>();
-
                 if (player.MyBrickType == brickType)
                 {
-                    brickSpawn.RespawnBrick(transform);
+                    brickSpawn.RespawnBrick();
                     PickUp();
                 }
             }
         }
-        
+
         private void PickUp()
         {
             Vector3 offset = transform.position - player.transform.position;
             Vector3 position = player.transform.position + offset;
             Quaternion quaternion = transform.rotation;
-                 
+
             player.PickUp(position, quaternion);
             Destroy(gameObject);
         }
 
-        public void SetBrickType(BrickType brickType)
-        {
-            this.brickType = brickType;
-        }
-
-        private void GetColor()
+        private void SetColor()
         {
             switch (brickType)
             {
@@ -67,6 +66,7 @@ namespace BridgeRace
                     gameObject.GetComponent<MeshRenderer>().material = materials[2];
                     break;
                 default:
+                    gameObject.GetComponent<MeshRenderer>().material = materials[1];
                     break;
             }
         }

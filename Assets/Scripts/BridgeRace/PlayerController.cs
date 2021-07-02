@@ -45,12 +45,12 @@ namespace BridgeRace
             }
         }
 
-        internal void PickUp(Vector3 brickPosition, Quaternion quaternion)
+        public void PickUp(Vector3 brickPosition, Quaternion quaternion)
         {
             BrickInPack brick = Instantiate(brickPrefab, brickPosition, quaternion, transform);
             countBrick++;
-                                   
-            brick.MoveBrickInPack(packPointStart.localPosition, packPointUp.localPosition, packPointEnd.localPosition, packPointEnd.localRotation, countBrick);          
+
+            brick.MoveBrickInPack(packPointStart.localPosition, packPointUp.localPosition, packPointEnd.localPosition, packPointEnd.localRotation, countBrick);
 
             bricks.Add(brick);
         }

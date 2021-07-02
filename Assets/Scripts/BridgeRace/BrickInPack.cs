@@ -27,7 +27,6 @@ namespace BridgeRace
         private Quaternion rotationBrick;
         private TrailRenderer trail;
 
-        private int countBrick = 0;
         private float time = 1;
 
         private void Start()
@@ -63,9 +62,12 @@ namespace BridgeRace
             rotationBrick.y = 0;
             print(pointStart);
 
-            countBrick = count;
             time = 0;
         }
 
+        internal void Destroy()
+        {
+            Destroy(gameObject);
+        }
     }
 }

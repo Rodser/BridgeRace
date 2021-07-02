@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace BridgeRace
@@ -27,6 +25,7 @@ namespace BridgeRace
         private int countBrick = 0;
 
         public BrickType MyBrickType => myBrickType;
+        public int CountDrick => countBrick;
 
         private void Start()
         {
@@ -54,6 +53,13 @@ namespace BridgeRace
             brick.MoveBrickInPack(packPointStart.localPosition, packPointUp.localPosition, packPointEnd.localPosition, packPointEnd.localRotation, countBrick);          
 
             bricks.Add(brick);
+        }
+
+        public void RemoveBrick()
+        {
+            bricks[countBrick - 1].Destroy();
+            bricks.RemoveAt(countBrick - 1);
+            countBrick--;
         }
     }
 }

@@ -108,7 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3535493bcf78ae24b9d853cf1e852ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickType: 1
-  offset: 0.001
-  speed: 4
-  pointNextBrick: {fileID: 0}
+  brickType: 2
+  materials:
+  - {fileID: 2100000, guid: 806b955bea73f1845b1a8731544a1e62, type: 2}
+  - {fileID: 2100000, guid: b97e518cc17c6aa489cb9e96f7964141, type: 2}
+  - {fileID: 2100000, guid: d3b67132f2b6af94d898bbd570ac885e, type: 2}

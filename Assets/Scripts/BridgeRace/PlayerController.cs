@@ -20,6 +20,7 @@ namespace BridgeRace
         [SerializeField]
         private Transform packPointEnd;
 
+        private Animator animatorPlayer;
         private Rigidbody player;
         private List<BrickInPack> bricks;
         private int countBrick = 0;
@@ -30,7 +31,9 @@ namespace BridgeRace
         private void Start()
         {
             player = GetComponent<Rigidbody>();
+            animatorPlayer = GetComponent<Animator>();
             bricks = new List<BrickInPack>();
+            GetComponentInChildren<Renderer>().material.color = ChoiceMaterial.SetColor(myBrickType);
         }
 
         private void FixedUpdate()
@@ -42,6 +45,11 @@ namespace BridgeRace
             {
                 player.MovePosition(transform.position + direction * Time.deltaTime);
                 player.MoveRotation(Quaternion.LookRotation(direction));
+                animatorPlayer.SetBool("run", true);
+            }
+            else
+            {
+                animatorPlayer.SetBool("run", false);
             }
         }
 
@@ -51,7 +59,7 @@ namespace BridgeRace
             countBrick++;
 
             brick.MoveBrickInPack(packPointStart.localPosition, packPointUp.localPosition, packPointEnd.localPosition, packPointEnd.localRotation, countBrick);
-
+            brick.SetColor(myBrickType);
             bricks.Add(brick);
         }
 

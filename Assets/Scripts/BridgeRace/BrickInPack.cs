@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BridgeRace
 {
@@ -11,7 +12,6 @@ namespace BridgeRace
         [SerializeField]
         private float speed = 1f;
 
-        private Bezier bezier;
         private Vector3 point0;
         private Vector3 point1;
         private Vector3 point2;
@@ -23,7 +23,6 @@ namespace BridgeRace
 
         private void Start()
         {
-            bezier = new Bezier();
             trail = GetComponentInChildren<TrailRenderer>();
         }
 
@@ -33,7 +32,7 @@ namespace BridgeRace
             {
                 trail.enabled = true;
                 time = Mathf.Clamp01(time + speed * Time.fixedDeltaTime);
-                transform.localPosition = bezier.GetBezier(point0, point1, point2, point3, time);
+                transform.localPosition = Bezier.GetBezier(point0, point1, point2, point3, time);
                 transform.localRotation = Quaternion.Lerp(transform.localRotation, rotationBrick, time);
             }
             else
@@ -58,6 +57,11 @@ namespace BridgeRace
         public void Destroy()
         {
             Destroy(gameObject);
+        }
+
+        internal void SetColor(BrickType type)
+        {
+            GetComponent<MeshRenderer>().material.color = ChoiceMaterial.SetColor(type);
         }
     }
 }

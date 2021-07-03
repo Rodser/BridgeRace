@@ -2,9 +2,9 @@
 
 namespace BridgeRace
 {
-     public class Bezier
+     public static class Bezier
     {        
-        public Vector3 GetBezier(Vector3 point0, Vector3 point1, Vector3 point2, Vector3 point3, float time)
+        public static Vector3 GetBezier(Vector3 point0, Vector3 point1, Vector3 point2, Vector3 point3, float time)
         {
             Vector3 point01 = Vector3.Lerp(point0, point1, time);
             Vector3 point02 = Vector3.Lerp(point1, point2, time);

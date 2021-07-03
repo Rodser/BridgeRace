@@ -2,17 +2,10 @@
 
 namespace BridgeRace
 {
-    public enum BrickType
-    {
-        Red, Blue, Green
-    }
-
     public class Brick : MonoBehaviour
     {
         [SerializeField]
         private BrickType brickType;
-        [SerializeField]
-        private Material[] materials;
 
         private PlayerController player;
         private BrickSpawn brickSpawn;
@@ -32,7 +25,7 @@ namespace BridgeRace
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.gameObject.CompareTag("Player"))
             {
                 if (player.MyBrickType == brickType)
                 {
@@ -54,21 +47,7 @@ namespace BridgeRace
 
         private void SetColor()
         {
-            switch (brickType)
-            {
-                case BrickType.Red:
-                    gameObject.GetComponent<MeshRenderer>().material = materials[0];
-                    break;
-                case BrickType.Blue:
-                    gameObject.GetComponent<MeshRenderer>().material = materials[1];
-                    break;
-                case BrickType.Green:
-                    gameObject.GetComponent<MeshRenderer>().material = materials[2];
-                    break;
-                default:
-                    gameObject.GetComponent<MeshRenderer>().material = materials[1];
-                    break;
-            }
+            GetComponent<MeshRenderer>().material.color = ChoiceMaterial.SetColor(brickType);            
         }
     }
 }

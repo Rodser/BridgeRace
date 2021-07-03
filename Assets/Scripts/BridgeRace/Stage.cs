@@ -14,20 +14,7 @@ namespace BridgeRace
 
         internal void SetColor(BrickType brickType)
         {
-            switch (brickType)
-            {
-                case BrickType.Red:
-                    gameObject.GetComponent<MeshRenderer>().material = materials[0];
-                    break;
-                case BrickType.Blue:
-                    gameObject.GetComponent<MeshRenderer>().material = materials[1];
-                    break;
-                case BrickType.Green:
-                    gameObject.GetComponent<MeshRenderer>().material = materials[2];
-                    break;
-                default:
-                    break;
-            }
+            GetComponent<MeshRenderer>().material.color = ChoiceMaterial.SetColor(brickType);
         }
     }
 }

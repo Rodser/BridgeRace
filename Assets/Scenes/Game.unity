@@ -10638,9 +10638,29 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 2719440454904270869, guid: d4e7bd4588e4c214ab508f05f254f933, type: 3}
+      propertyPath: m_Name
+      value: PointBizer
+      objectReference: {fileID: 0}
     - target: {fileID: 3669365397244135193, guid: d4e7bd4588e4c214ab508f05f254f933, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263206690358559991, guid: d4e7bd4588e4c214ab508f05f254f933, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263206690358559991, guid: d4e7bd4588e4c214ab508f05f254f933, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897377953616676721, guid: d4e7bd4588e4c214ab508f05f254f933, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897377953616676721, guid: d4e7bd4588e4c214ab508f05f254f933, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 9023678625182668193, guid: d4e7bd4588e4c214ab508f05f254f933, type: 3}
       propertyPath: joystick
@@ -10654,6 +10674,10 @@ PrefabInstance:
       propertyPath: brickPrefab
       value: 
       objectReference: {fileID: 7188359432929250763, guid: 22ea4fdef0b41c5478436e117462b888, type: 3}
+    - target: {fileID: 9023678625182668193, guid: d4e7bd4588e4c214ab508f05f254f933, type: 3}
+      propertyPath: myBrickType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9023678625182668193, guid: d4e7bd4588e4c214ab508f05f254f933, type: 3}
       propertyPath: packPointUp
       value: 

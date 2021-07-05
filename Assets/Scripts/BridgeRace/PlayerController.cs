@@ -24,6 +24,7 @@ namespace BridgeRace
         private Rigidbody player;
         private List<BrickInPack> bricks;
         private int countBrick = 0;
+        private Vector3 brickPosition0;
 
         public BrickType MyBrickType => myBrickType;
         public int CountDrick => countBrick;
@@ -58,9 +59,11 @@ namespace BridgeRace
             BrickInPack brick = Instantiate(brickPrefab, brickPosition, quaternion, transform);
             countBrick++;
 
-            brick.MoveBrickInPack(packPointStart.localPosition, packPointUp.localPosition, packPointEnd.localPosition, packPointEnd.localRotation, countBrick);
+            brick.MoveBrickInPack(packPointStart, packPointUp, packPointEnd, countBrick);
             brick.SetColor(myBrickType);
             bricks.Add(brick);
+
+            brickPosition0 = brickPosition;
         }
 
         public void RemoveBrick()
@@ -68,6 +71,21 @@ namespace BridgeRace
             bricks[countBrick - 1].Destroy();
             bricks.RemoveAt(countBrick - 1);
             countBrick--;
+        }
+
+
+        private void OnDrawGizmos()
+        {
+            int sigmentsNumber = 20;
+            Vector3 preveousePoint = brickPosition0;
+
+            for (int i = 0; i < sigmentsNumber + 1; i++)
+            {
+                float paremeter = (float)i / sigmentsNumber;
+                Vector3 point = Bezier.GetBezier4(brickPosition0, packPointStart.position, packPointUp.position, packPointEnd.position, paremeter);
+                Gizmos.DrawLine(preveousePoint, point);
+                preveousePoint = point;
+            }
         }
     }
 }

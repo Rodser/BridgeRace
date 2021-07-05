@@ -40,7 +40,6 @@ namespace BridgeRace
             Vector3 offset = transform.position - player.transform.position;
             Vector3 position = player.transform.position + offset;
             Quaternion quaternion = transform.rotation;
-
             player.PickUp(position, quaternion);
             Destroy(gameObject);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace BridgeRace
@@ -8,7 +9,7 @@ namespace BridgeRace
         [SerializeField]
         private BrickType brickType;
         [SerializeField]
-        private float offset = 0.1f;
+        private float shiftInHeight = 0.1f;
         [SerializeField]
         private float speed = 1f;
 
@@ -19,39 +20,24 @@ namespace BridgeRace
         private Quaternion rotationBrick;
         private TrailRenderer trail;
 
-        private float time = 1;
+        private float time = 1f;
 
         private void Start()
         {
+            point0 = new Vector3(0,0,0);
             trail = GetComponentInChildren<TrailRenderer>();
         }
 
-        private void FixedUpdate()
-        {
-            if (time < 1)
-            {
-                trail.enabled = true;
-                time = Mathf.Clamp01(time + speed * Time.fixedDeltaTime);
-                transform.localPosition = Bezier.GetBezier(point0, point1, point2, point3, time);
-                transform.localRotation = Quaternion.Lerp(transform.localRotation, rotationBrick, time);
-            }
-            else
-            {
-                trail.enabled = false;
-            }
-        }
 
-        public void MoveBrickInPack(Vector3 pointStart, Vector3 pointUp, Vector3 pointEnd, Quaternion rotation, int count)
+        public void MoveBrickInPack(Transform pointStart, Transform pointUp, Transform pointEnd, int count)
         {
-            point0 = transform.position;
-            point1 = pointStart;
-            point2 = pointUp;
-            point3 = pointEnd;
-            point3.y += offset * count;
+            point1 = pointStart.localPosition;
+            point2 = pointUp.localPosition;
+            point3 = pointEnd.localPosition;
+            point3.y += shiftInHeight * count;
 
-            rotationBrick = rotation;
-            rotationBrick.y = 0;
-            time = 0;
+            rotationBrick = pointEnd.localRotation;
+            StartCoroutine(MoverCoroutine());
         }
 
         public void Destroy()
@@ -62,6 +48,35 @@ namespace BridgeRace
         internal void SetColor(BrickType type)
         {
             GetComponent<MeshRenderer>().material.color = ChoiceMaterial.SetColor(type);
+        }
+
+        private IEnumerator MoverCoroutine()
+        {
+            time = 0;
+
+            while (time < 1)
+            {
+                yield return new WaitForEndOfFrame();
+                time += speed * Time.deltaTime;
+                transform.localPosition = Bezier.GetBezier4(point0, point1, point2, point3, time);
+                transform.localRotation = Quaternion.Lerp(transform.localRotation, rotationBrick, time);
+            }
+
+            trail.enabled = false;
+        }
+
+        private void OnDrawGizmos()
+        {
+            int sigmentsNumber = 20;
+            Vector3 preveousePoint = point0;
+            Gizmos.color = Color.cyan;
+            for (int i = 0; i < sigmentsNumber + 1; i++)
+            {
+                float paremeter = (float)i / sigmentsNumber;
+                Vector3 point = Bezier.GetBezier4(point0, point1, point2, point3, paremeter);
+                Gizmos.DrawLine(preveousePoint, point);
+                preveousePoint = point;
+            }
         }
     }
 }

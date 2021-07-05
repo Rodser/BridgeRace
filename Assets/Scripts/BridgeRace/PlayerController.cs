@@ -34,6 +34,7 @@ namespace BridgeRace
             player = GetComponent<Rigidbody>();
             animatorPlayer = GetComponent<Animator>();
             bricks = new List<BrickInPack>();
+            myBrickType = (BrickType)Random.Range(0, 3);
             GetComponentInChildren<Renderer>().material.color = ChoiceMaterial.SetColor(myBrickType);
         }
 

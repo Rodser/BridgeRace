@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace BridgeRace
 {
@@ -10,9 +12,17 @@ namespace BridgeRace
         {
             if (other.gameObject.CompareTag("Spawn"))
             {
-                Destroy(other.gameObject);
                 GoalEvent.Invoke();
+
+                StartCoroutine(ReloadScene());
+                Destroy(other.gameObject);
             }
+        }
+
+        private IEnumerator ReloadScene()
+        {
+            yield return new WaitForSeconds(3);
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
         }
     }
 }
